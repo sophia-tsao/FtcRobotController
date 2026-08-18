@@ -33,12 +33,22 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
         // Wait until PLAY is pressed
         waitForStart();
 
-        // Keep running until STOP is pressed
-        while (opModeIsActive()) {
+        //run until stop is pressed
+        double tgtPower = 0;
 
+        while (opModeIsActive()){
+            //reads vertical position of left joystick
+            tgtPower = -this.gamepad1.left_stick_y;
+
+            motorTest.setPower(tgtPower);
+
+            telemetry.addData("Target Power", tgtPower);
+            telemetry.addData("Motor power", motorTest.getPower());
             telemetry.addData("Status", "Running");
             telemetry.update();
+
         }
+
     }
 
 }
