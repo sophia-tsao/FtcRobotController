@@ -38,10 +38,9 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
 
         while (opModeIsActive()){
             //reads vertical position of left joystick
-            tgtPower = -this.gamepad1.left_stick_y;
-
+            tgtPower = -this.gamepad1.left_stick_y; 
+            // y=-1 joystick in topmost position and y=+1 when joystick in botommost position
             motorTest.setPower(tgtPower);
-
             telemetry.addData("Target Power", tgtPower);
             telemetry.addData("Motor power", motorTest.getPower());
             telemetry.addData("Status", "Running");
