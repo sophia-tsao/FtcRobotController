@@ -21,6 +21,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
     private DcMotor frontRight;
     private DcMotor backRight;
     private TouchSensorControl touchSensor;
+    private DistanceSensorControl distanceControl;
 
 
     @Override
@@ -37,6 +38,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         touchSensor = new TouchSensorControl(hardwareMap);
+        distanceControl = new DistanceSensorControl(hardwareMap);
 
         //because motors mounted on opposite sides physically face opposite
         frontRight.setDirection(DcMotor.Direction.REVERSE);
@@ -92,7 +94,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
             frontRight.setPower(rightPower);
             backRight.setPower(rightPower);
 
-            //sensor telemetry
+            //touch sensor telemetry
             if (touchSensor.isPressed()) {
                 telemetry.addData("Touch Sensor", "Pressed");
             } else {
@@ -100,6 +102,16 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
             }
 
             telemetry.update();
+
+            //distance sensor telemetry + code
+            //stops if 5 inches from something detected
+            double distance = distanceControl.getDistanceInches();
+            telemetry.addData("Distance", distance);
+            telemetry.update();
+
+            if (distanceControl.isTooClose(5.0)&& drive > 0){
+                drive = 0;
+            }
 
             //telemetry
             telemetry.addData("Drive", drive);
