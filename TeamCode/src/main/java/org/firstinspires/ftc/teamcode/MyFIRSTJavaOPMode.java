@@ -1,4 +1,4 @@
-package org.firstinspires.ftc;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -20,6 +20,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
     private DcMotor backLeft;
     private DcMotor frontRight;
     private DcMotor backRight;
+    private TouchSensorControl touchSensor;
 
 
     @Override
@@ -35,6 +36,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
+        touchSensor = new TouchSensorControl(hardwareMap);
 
         //because motors mounted on opposite sides physically face opposite
         frontRight.setDirection(DcMotor.Direction.REVERSE);
@@ -89,6 +91,15 @@ public class MyFIRSTJavaOpMode extends LinearOpMode{
 
             frontRight.setPower(rightPower);
             backRight.setPower(rightPower);
+
+            //sensor telemetry
+            if (touchSensor.isPressed()) {
+                telemetry.addData("Touch Sensor", "Pressed");
+            } else {
+                telemetry.addData("Touch Sensor", "Not pressed");
+            }
+
+            telemetry.update();
 
             //telemetry
             telemetry.addData("Drive", drive);
