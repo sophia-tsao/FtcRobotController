@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Gyroscope;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "My FIRST Java OpMode")
-public class MyFIRSTJavaOpMode extends LinearOpMode{
+public class MyFIRSTJavaOPMode extends LinearOpMode{
 
     private Gyroscope imu;
     private DigitalChannel digitalTouch;
